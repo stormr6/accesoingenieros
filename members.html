@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Área de Miembros — Claude para Ingenieros</title>
+  <meta name="robots" content="noindex, nofollow" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ── HEADER ── -->
+  <header class="members-header">
+    <div class="header-inner">
+      <div class="header-brand">
+        <div class="logo" aria-hidden="true">✳</div>
+        <span>Claude para Ingenieros</span>
+      </div>
+      <button class="btn btn-outline" id="logoutBtn" aria-label="Cerrar sesión">
+        Cerrar sesión
+      </button>
+    </div>
+  </header>
+
+  <!-- ── CONTENIDO PRINCIPAL ── -->
+  <main class="members-main" id="membersMain">
+
+    <!-- Barra de bienvenida — el email se inserta desde app.js -->
+    <div class="welcome-bar" id="welcomeBar">
+      <span class="wave">👋</span>
+      <p>¡Bienvenido de vuelta! Tienes acceso completo a tu kit. <br/>
+        <strong id="welcomeEmail">Cargando...</strong>
+      </p>
+    </div>
+
+    <!-- ════════════════════════════════
+         SECCIÓN: MÓDULOS INCLUIDOS
+    ════════════════════════════════ -->
+    <section aria-labelledby="modulesTitle">
+      <div class="section-header">
+        <h2 id="modulesTitle">Tu Kit Completo</h2>
+        <p>Descarga cada recurso de tu compra</p>
+      </div>
+
+      <div class="modules-grid">
+
+        <!-- MÓDULO 1 -->
+        <div class="module-card">
+          <!-- Replace the div below with <img src="ruta-imagen.jpg" alt="..."> cuando tengas la portada -->
+          <div class="module-cover">
+            <span class="cover-icon">🖼️</span>
+            <span class="cover-label">Portada</span>
+            <!-- Replace with real cover image -->
+          </div>
+          <div class="module-body">
+            <h3>40 Prompts para Ingenieros</h3>
+            <!-- Replace href="#" with real PDF link -->
+            <a href="#" class="btn btn-orange" download>
+              ⬇ Descargar PDF
+            </a>
+            <!-- Replace with real PDF link -->
+          </div>
+        </div>
+
+        <!-- MÓDULO 2 -->
+        <div class="module-card">
+          <div class="module-cover">
+            <span class="cover-icon">🖼️</span>
+            <span class="cover-label">Portada</span>
+            <!-- Replace with real cover image -->
+          </div>
+          <div class="module-body">
+            <h3>5 Agentes Especializados</h3>
+            <!-- Replace href="#" with real PDF link -->
+            <a href="#" class="btn btn-orange" download>
+              ⬇ Descargar PDF
+            </a>
+            <!-- Replace with real PDF link -->
+          </div>
+        </div>
+
+        <!-- MÓDULO 3 -->
+        <div class="module-card">
+          <div class="module-cover">
+            <span class="cover-icon">🖼️</span>
+            <span class="cover-label">Portada</span>
+            <!-- Replace with real cover image -->
+          </div>
+          <div class="module-body">
+            <h3>Guía de Implementación</h3>
+            <!-- Replace href="#" with real PDF link -->
+            <a href="#" class="btn btn-orange" download>
+              ⬇ Descargar PDF
+            </a>
+            <!-- Replace with real PDF link -->
+          </div>
+        </div>
+
+        <!-- MÓDULO 4 -->
+        <div class="module-card">
+          <div class="module-cover">
+            <span class="cover-icon">🖼️</span>
+            <span class="cover-label">Portada</span>
+            <!-- Replace with real cover image -->
+          </div>
+          <div class="module-body">
+            <h3>Bonus: Plantillas Técnicas</h3>
+            <!-- Replace href="#" with real PDF link -->
+            <a href="#" class="btn btn-orange" download>
+              ⬇ Descargar PDF
+            </a>
+            <!-- Replace with real PDF link -->
+          </div>
+        </div>
+
+      </div><!-- /modules-grid -->
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ════════════════════════════════
+         SECCIÓN: TIENDA / ORDERBUMPS
+         Los estados (activo/bloqueado) se renderizan desde app.js
+    ════════════════════════════════ -->
+    <section aria-labelledby="storeTitle">
+      <div class="section-header">
+        <h2 id="storeTitle">Potencia tu Kit</h2>
+        <p>Complementos disponibles para tu cuenta</p>
+      </div>
+
+      <!-- Los cards se inyectan dinámicamente por app.js -->
+      <div class="store-grid" id="storeGrid">
+
+        <!-- Skeletons de carga visibles hasta que app.js cargue el estado real -->
+        <div class="ob-card" style="opacity:0.4">
+          <div class="ob-cover skeleton"></div>
+          <div class="ob-body">
+            <div class="skeleton" style="height:18px;width:70%;margin-bottom:10px;"></div>
+            <div class="skeleton" style="height:14px;width:100%;margin-bottom:6px;"></div>
+            <div class="skeleton" style="height:14px;width:80%;margin-bottom:16px;"></div>
+            <div class="skeleton" style="height:38px;width:100%;"></div>
+          </div>
+        </div>
+        <div class="ob-card" style="opacity:0.4">
+          <div class="ob-cover skeleton"></div>
+          <div class="ob-body">
+            <div class="skeleton" style="height:18px;width:70%;margin-bottom:10px;"></div>
+            <div class="skeleton" style="height:14px;width:100%;margin-bottom:6px;"></div>
+            <div class="skeleton" style="height:14px;width:80%;margin-bottom:16px;"></div>
+            <div class="skeleton" style="height:38px;width:100%;"></div>
+          </div>
+        </div>
+        <div class="ob-card" style="opacity:0.4">
+          <div class="ob-cover skeleton"></div>
+          <div class="ob-body">
+            <div class="skeleton" style="height:18px;width:70%;margin-bottom:10px;"></div>
+            <div class="skeleton" style="height:14px;width:100%;margin-bottom:6px;"></div>
+            <div class="skeleton" style="height:14px;width:80%;margin-bottom:16px;"></div>
+            <div class="skeleton" style="height:38px;width:100%;"></div>
+          </div>
+        </div>
+
+      </div><!-- /store-grid -->
+    </section>
+
+  </main>
+
+  <script type="module" src="app.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Claude para Ingenieros — Acceso</title>
+  <meta name="description" content="Accede a tu área de miembros de Claude para Ingenieros." />
+  <meta name="robots" content="noindex, nofollow" />
+
+  <!-- Preconnect para performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="login-page">
+
+  <main class="login-card" role="main">
+
+    <!-- Logo asterisco -->
+    <div class="logo" aria-hidden="true">✳</div>
+
+    <h1>Claude para Ingenieros</h1>
+    <p class="subtitle">Accede a tu área de miembros</p>
+
+    <form class="login-form" id="loginForm" novalidate>
+
+      <div class="input-group">
+        <label for="emailInput">Correo electrónico</label>
+        <input
+          type="email"
+          id="emailInput"
+          name="email"
+          placeholder="Tu email de compra"
+          autocomplete="email"
+          inputmode="email"
+          required
+        />
+      </div>
+
+      <!-- Mensaje de error — se muestra dinámicamente desde app.js -->
+      <div class="error-msg" id="errorMsg" role="alert" aria-live="polite">
+        Este email no tiene acceso. ¿Compraste? <strong>Contáctanos.</strong>
+      </div>
+
+      <button type="submit" class="btn btn-orange" id="loginBtn">
+        Acceder
+      </button>
+
+    </form>
+
+    <p class="login-footer">
+      © 2026 Ingenieros con Claude · Todos los derechos reservados
+    </p>
+
+  </main>
+
+  <!-- Firebase SDK (módulos ES) -->
+  <script type="module" src="app.js"></script>
+
+</body>
+</html>
