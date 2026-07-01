@@ -30,21 +30,60 @@
   <!-- ── CONTENIDO PRINCIPAL ── -->
   <main class="members-main" id="membersMain">
 
-    <!-- Barra de bienvenida — el email se inserta desde app.js -->
+    <!-- Barra de bienvenida -->
     <div class="welcome-bar" id="welcomeBar">
       <span class="wave">👋</span>
-      <p>¡Bienvenido de vuelta! Tienes acceso completo a tu kit. <br/>
+      <p>¡Bienvenido de vuelta! Tienes acceso completo a tu kit.<br/>
         <strong id="welcomeEmail">Cargando...</strong>
       </p>
     </div>
 
     <!-- ════════════════════════════════
-         SECCIÓN: MÓDULOS INCLUIDOS
+         VISTA 1: PRODUCTOS
+         Visible por defecto — lista de productos comprados
     ════════════════════════════════ -->
-    <section aria-labelledby="modulesTitle">
+    <section id="viewProducts" aria-labelledby="productsTitle">
       <div class="section-header">
-        <h2 id="modulesTitle">Tu Kit Completo</h2>
-        <p>Descarga cada recurso de tu compra</p>
+        <h2 id="productsTitle">Tus Productos</h2>
+        <p>Selecciona un producto para acceder al contenido</p>
+      </div>
+
+      <div class="modules-grid">
+
+        <!-- PRODUCTO PRINCIPAL — Claude para Ingenieros -->
+        <div class="module-card product-card" id="cardPrincipal" role="button" tabindex="0" aria-label="Abrir Claude para Ingenieros">
+          <div class="module-cover">
+            <!-- Replace with real cover image: <img src="covers/producto-principal.jpg" alt="Claude para Ingenieros"> -->
+            <span class="cover-icon">🖼️</span>
+            <span class="cover-label">Portada</span>
+          </div>
+          <div class="module-body">
+            <h3>Claude para Ingenieros</h3>
+            <button class="btn btn-orange" onclick="mostrarModulos()">
+              Ver contenido →
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <div class="section-divider" id="dividerProducts"></div>
+
+    <!-- ════════════════════════════════
+         VISTA 2: MÓDULOS DEL PRODUCTO
+         Oculta inicialmente — se muestra al entrar al producto
+    ════════════════════════════════ -->
+    <section id="viewModules" style="display:none;" aria-labelledby="modulesTitle">
+
+      <!-- Botón volver -->
+      <button class="btn-back" onclick="volverProductos()" aria-label="Volver a productos">
+        ← Volver
+      </button>
+
+      <div class="section-header" style="margin-top:16px;">
+        <h2 id="modulesTitle">Claude para Ingenieros</h2>
+        <p>Accede a cada módulo de tu kit</p>
       </div>
 
       <div class="modules-grid">
@@ -109,14 +148,13 @@
           </div>
         </div>
 
-      </div><!-- /modules-grid -->
+      </div>
     </section>
 
     <div class="section-divider"></div>
 
     <!-- ════════════════════════════════
          SECCIÓN: TIENDA / ORDERBUMPS
-         Los estados (activo/bloqueado) se renderizan desde app.js
     ════════════════════════════════ -->
     <section aria-labelledby="storeTitle">
       <div class="section-header">
@@ -124,10 +162,8 @@
         <p>Complementos disponibles para tu cuenta</p>
       </div>
 
-      <!-- Los cards se inyectan dinámicamente por app.js -->
       <div class="store-grid" id="storeGrid">
-
-        <!-- Skeletons de carga visibles hasta que app.js cargue el estado real -->
+        <!-- Skeletons de carga -->
         <div class="ob-card" style="opacity:0.4">
           <div class="ob-cover skeleton"></div>
           <div class="ob-body">
@@ -155,11 +191,26 @@
             <div class="skeleton" style="height:38px;width:100%;"></div>
           </div>
         </div>
-
-      </div><!-- /store-grid -->
+      </div>
     </section>
 
   </main>
+
+  <script>
+    function mostrarModulos() {
+      document.getElementById('viewProducts').style.display = 'none';
+      document.getElementById('dividerProducts').style.display = 'none';
+      document.getElementById('viewModules').style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function volverProductos() {
+      document.getElementById('viewModules').style.display = 'none';
+      document.getElementById('viewProducts').style.display = 'block';
+      document.getElementById('dividerProducts').style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
 
   <script type="module" src="app.js"></script>
 
