@@ -141,6 +141,147 @@
       </div>
     </section>
 
+    <!-- ════════════════════════════════
+         VISTA 3: MÓDULOS OB1 — Paquete 10 Agentes
+         Oculta — se muestra solo si el usuario compró OB1
+    ════════════════════════════════ -->
+    <section id="viewModulesOB1" style="display:none;" aria-labelledby="ob1Title">
+
+      <button class="btn-back" onclick="volverProductos()" aria-label="Volver a productos">
+        ← Volver
+      </button>
+
+      <div class="section-header" style="margin-top:16px;">
+        <h2 id="ob1Title">Paquete 10 Agentes Especializados</h2>
+        <p>Accede a cada agente de tu paquete</p>
+      </div>
+
+      <div class="modules-grid">
+
+        <div class="module-card">
+          <div class="module-cover">
+            <img src="https://i.imgur.com/pB0mcAA.jpeg" alt="Agente 1" loading="lazy">
+          </div>
+          <div class="module-body">
+            <h3>Agente 1</h3>
+            <!-- Replace href="#" with real content link -->
+            <a href="#" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a>
+          </div>
+        </div>
+
+        <div class="module-card">
+          <div class="module-cover">
+            <img src="https://i.imgur.com/yVUaPId.jpeg" alt="Agente 2" loading="lazy">
+          </div>
+          <div class="module-body">
+            <h3>Agente 2</h3>
+            <!-- Replace href="#" with real content link -->
+            <a href="#" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a>
+          </div>
+        </div>
+
+        <div class="module-card">
+          <div class="module-cover">
+            <img src="https://i.imgur.com/4eRuQHb.jpeg" alt="Agente 3" loading="lazy">
+          </div>
+          <div class="module-body">
+            <h3>Agente 3</h3>
+            <!-- Replace href="#" with real content link -->
+            <a href="#" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a>
+          </div>
+        </div>
+
+        <div class="module-card">
+          <div class="module-cover">
+            <img src="https://i.imgur.com/svzJck2.jpeg" alt="Agente 4" loading="lazy">
+          </div>
+          <div class="module-body">
+            <h3>Agente 4</h3>
+            <!-- Replace href="#" with real content link -->
+            <a href="#" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a>
+          </div>
+        </div>
+
+        <div class="module-card">
+          <div class="module-cover">
+            <img src="https://i.imgur.com/Hcfm9xd.jpeg" alt="Agente 5" loading="lazy">
+          </div>
+          <div class="module-body">
+            <h3>Agente 5</h3>
+            <!-- Replace href="#" with real content link -->
+            <a href="#" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a>
+          </div>
+        </div>
+
+        <div class="module-card">
+          <div class="module-cover">
+            <img src="https://i.imgur.com/Fcq0jb4.jpeg" alt="Agente 6" loading="lazy">
+          </div>
+          <div class="module-body">
+            <h3>Agente 6</h3>
+            <!-- Replace href="#" with real content link -->
+            <a href="#" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a>
+          </div>
+        </div>
+
+        <div class="module-card">
+          <div class="module-cover">
+            <img src="https://i.imgur.com/jnHyKG5.jpeg" alt="Agente 7" loading="lazy">
+          </div>
+          <div class="module-body">
+            <h3>Agente 7</h3>
+            <!-- Replace href="#" with real content link -->
+            <a href="#" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a>
+          </div>
+        </div>
+
+        <div class="module-card">
+          <div class="module-cover">
+            <img src="https://i.imgur.com/MU8S3hq.jpeg" alt="Agente 8" loading="lazy">
+          </div>
+          <div class="module-body">
+            <h3>Agente 8</h3>
+            <!-- Replace href="#" with real content link -->
+            <a href="#" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a>
+          </div>
+        </div>
+
+        <div class="module-card">
+          <div class="module-cover">
+            <img src="https://i.imgur.com/iEJKAas.jpeg" alt="Agente 9" loading="lazy">
+          </div>
+          <div class="module-body">
+            <h3>Agente 9</h3>
+            <!-- Replace href="#" with real content link -->
+            <a href="#" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a>
+          </div>
+        </div>
+
+        <div class="module-card">
+          <div class="module-cover">
+            <img src="https://i.imgur.com/Qh6ktLA.jpeg" alt="Agente 10" loading="lazy">
+          </div>
+          <div class="module-body">
+            <h3>Agente 10</h3>
+            <!-- Replace href="#" with real content link -->
+            <a href="#" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a>
+          </div>
+        </div>
+
+        <div class="module-card">
+          <div class="module-cover">
+            <img src="https://i.imgur.com/sXLzutP.jpeg" alt="Bonus" loading="lazy">
+          </div>
+          <div class="module-body">
+            <h3>Bonus</h3>
+            <!-- Replace href="#" with real content link -->
+            <a href="#" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
     <div class="section-divider"></div>
 
     <!-- ════════════════════════════════
@@ -187,15 +328,33 @@
   </main>
 
   <script>
+    const VISTAS_OB = ['viewModules', 'viewModulesOB1'];
+
+    function ocultarTodasVistas() {
+      VISTAS_OB.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.display = 'none';
+      });
+    }
+
     function mostrarModulos() {
       document.getElementById('viewProducts').style.display = 'none';
       document.getElementById('dividerProducts').style.display = 'none';
+      ocultarTodasVistas();
       document.getElementById('viewModules').style.display = 'block';
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
+    function mostrarVistaOB(vistaId) {
+      document.getElementById('viewProducts').style.display = 'none';
+      document.getElementById('dividerProducts').style.display = 'none';
+      ocultarTodasVistas();
+      document.getElementById(vistaId).style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
     function volverProductos() {
-      document.getElementById('viewModules').style.display = 'none';
+      ocultarTodasVistas();
       document.getElementById('viewProducts').style.display = 'block';
       document.getElementById('dividerProducts').style.display = 'block';
       window.scrollTo({ top: 0, behavior: 'smooth' });
