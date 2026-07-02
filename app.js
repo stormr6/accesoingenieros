@@ -16,8 +16,8 @@ const ORDERBUMPS = [
     nombre: "Paquete 10 Agentes Especializados",
     descripcion: "10 agentes listos para usar en Claude. Gestión, contratos, presupuestos y más.",
     hotmartUrl: "https://pay.hotmart.com/R106176927I",
-    // Replace with real cover image path when available
-    coverImg: null
+    coverImg: "https://i.imgur.com/Wo34A3L.jpeg",
+    vistaModulos: "viewModulesOB1"
   },
   {
     key: "ob2_normas",
@@ -185,15 +185,16 @@ function renderStoreCards(productos) {
       ? `<span class="badge badge-active">✔ Acceso activo</span>`
       : `<span class="badge badge-locked">🔒 Bloqueado</span>`;
 
-    const actionHtml = comprado
-      ? `<!-- Replace href="#" with real content URL -->
-         <a href="#" class="btn btn-green">
-           Ir al contenido →
-         </a>
-         <!-- Replace with real content link -->`
-      : `<a href="${ob.hotmartUrl}" class="btn btn-orange" target="_blank" rel="noopener noreferrer">
-           Obtener acceso
-         </a>`;
+    let actionHtml;
+    if (comprado) {
+      if (ob.vistaModulos) {
+        actionHtml = `<button class="btn btn-green" onclick="mostrarVistaOB('${ob.vistaModulos}')">Ir al contenido →</button>`;
+      } else {
+        actionHtml = `<a href="#" class="btn btn-green" target="_blank" rel="noopener noreferrer">Ir al contenido →</a>`;
+      }
+    } else {
+      actionHtml = `<a href="${ob.hotmartUrl}" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Obtener acceso</a>`;
+    }
 
     const card = document.createElement("div");
     card.className = "ob-card";
