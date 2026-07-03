@@ -16,7 +16,7 @@ const ORDERBUMPS = [
     nombre: "Paquete 10 Agentes Especializados",
     descripcion: "10 agentes listos para usar en Claude. Gestión, contratos, presupuestos y más.",
     hotmartUrl: "https://pay.hotmart.com/R106176927I",
-    coverImg: "https://i.imgur.com/Wo34A3L.jpeg",
+    coverImg: "https://i.imgur.com/dXXWhQq.jpeg",
     vistaModulos: "viewModulesOB1"
   },
   {
@@ -24,32 +24,28 @@ const ORDERBUMPS = [
     nombre: "KIT Claude para Normas Técnicas 2026",
     descripcion: "Agente IA + 15 prompts + 5 correos + simulador de impacto por tipo de obra.",
     hotmartUrl: "https://pay.hotmart.com/Q106265015Y",
-    // Replace with real cover image path when available
-    coverImg: null
+    coverImg: "https://i.imgur.com/VytblxS.jpeg"
   },
   {
     key: "ob3_estudio",
     nombre: "Pack Estudio de Ingeniería Rentable",
     descripcion: "Agente IA + 20 prompts + 10 scripts + simulador de honorario + tabla 2026.",
     hotmartUrl: "https://pay.hotmart.com/U106265049G",
-    // Replace with real cover image path when available
-    coverImg: null
+    coverImg: "https://i.imgur.com/4Ds3UKT.jpeg"
   },
   {
     key: "ob4_actualizaciones",
     nombre: "Actualizaciones y Funcionalidades",
     descripcion: "Recibe todas las actualizaciones futuras del kit sin costo adicional.",
     hotmartUrl: "https://pay.hotmart.com/L106176805W",
-    // Replace with real cover image path when available
-    coverImg: null
+    coverImg: "https://i.imgur.com/dwSLyk3.jpeg"
   },
   {
     key: "ob5_vitalicio",
     nombre: "Acceso Vitalicio",
     descripcion: "Paga una vez y accede para siempre. Sin suscripciones, sin renovaciones.",
     hotmartUrl: "https://pay.hotmart.com/Y106176766S",
-    // Replace with real cover image path when available
-    coverImg: null
+    coverImg: "https://i.imgur.com/pqa50aB.jpeg"
   }
 ];
 
