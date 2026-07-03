@@ -502,6 +502,52 @@ body {
   margin-top: auto;
 }
 
+/* ── BENEFIT CARD (OB4 / OB5) ── */
+.benefit-card {
+  max-width: 560px;
+  margin: 40px auto;
+  background: var(--navy-light);
+  border: 1px solid rgba(255, 107, 0, 0.2);
+  border-radius: 20px;
+  padding: 48px 40px;
+  text-align: center;
+  box-shadow: 0 0 40px rgba(255, 107, 0, 0.08);
+}
+
+.benefit-icon {
+  font-size: 4rem;
+  line-height: 1;
+  margin-bottom: 24px;
+}
+
+.benefit-card h2 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--white);
+  margin-bottom: 16px;
+  letter-spacing: -0.02em;
+}
+
+.benefit-card p {
+  font-size: 1rem;
+  color: var(--gray-200);
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+
+.benefit-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 107, 0, 0.12);
+  border: 1px solid rgba(255, 107, 0, 0.3);
+  color: var(--orange);
+  padding: 8px 20px;
+  border-radius: 999px;
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
 /* ── BOTÃO VOLTAR ── */
 .btn-back {
   display: inline-flex;
