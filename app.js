@@ -40,14 +40,16 @@ const ORDERBUMPS = [
     nombre: "Actualizaciones y Funcionalidades",
     descripcion: "Recibe todas las actualizaciones futuras del kit sin costo adicional.",
     hotmartUrl: "https://pay.hotmart.com/L106176805W",
-    coverImg: "https://i.imgur.com/dwSLyk3.jpeg"
+    coverImg: "https://i.imgur.com/dwSLyk3.jpeg",
+    vistaModulos: "viewModulesOB4"
   },
   {
     key: "ob5_vitalicio",
     nombre: "Acceso Vitalicio",
     descripcion: "Paga una vez y accede para siempre. Sin suscripciones, sin renovaciones.",
     hotmartUrl: "https://pay.hotmart.com/Y106176766S",
-    coverImg: "https://i.imgur.com/pqa50aB.jpeg"
+    coverImg: "https://i.imgur.com/pqa50aB.jpeg",
+    vistaModulos: "viewModulesOB5"
   }
 ];
 
