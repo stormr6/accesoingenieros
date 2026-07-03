@@ -24,7 +24,8 @@ const ORDERBUMPS = [
     nombre: "KIT Claude para Normas Técnicas 2026",
     descripcion: "Agente IA + 15 prompts + 5 correos + simulador de impacto por tipo de obra.",
     hotmartUrl: "https://pay.hotmart.com/Q106265015Y",
-    coverImg: "https://i.imgur.com/VytblxS.jpeg"
+    coverImg: "https://i.imgur.com/VytblxS.jpeg",
+    vistaModulos: "viewModulesOB2"
   },
   {
     key: "ob3_estudio",
