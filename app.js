@@ -32,7 +32,8 @@ const ORDERBUMPS = [
     nombre: "Pack Estudio de Ingeniería Rentable",
     descripcion: "Agente IA + 20 prompts + 10 scripts + simulador de honorario + tabla 2026.",
     hotmartUrl: "https://pay.hotmart.com/U106265049G",
-    coverImg: "https://i.imgur.com/4Ds3UKT.jpeg"
+    coverImg: "https://i.imgur.com/4Ds3UKT.jpeg",
+    vistaModulos: "viewModulesOB3"
   },
   {
     key: "ob4_actualizaciones",
