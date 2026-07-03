@@ -43,14 +43,12 @@ const db = getFirestore();
 // Los encuentras en: Hotmart → Productos → ID del producto.
 //
 const PRODUCT_MAP = {
-  // "ID_HOTMART": "campo_firestore"
-  // Replace the keys below with your actual Hotmart product IDs
-  "REPLACE_MAIN_PRODUCT_ID":  "ingenieros_principal",
-  "REPLACE_OB1_PRODUCT_ID":   "ob1_agentes",
-  "REPLACE_OB2_PRODUCT_ID":   "ob2_normas",
-  "REPLACE_OB3_PRODUCT_ID":   "ob3_estudio",
-  "REPLACE_OB4_PRODUCT_ID":   "ob4_actualizaciones",
-  "REPLACE_OB5_PRODUCT_ID":   "ob5_vitalicio"
+  "7824773": "ingenieros_principal",
+  "7888135": "ob1_agentes",
+  "7914914": "ob2_normas",
+  "7914929": "ob3_estudio",
+  "7888071": "ob4_actualizaciones",
+  "7888056": "ob5_vitalicio"
 };
 
 // Token de verificación (opcional pero recomendado)
@@ -108,8 +106,8 @@ const server = http.createServer(async (req, res) => {
         return;
       }
 
-      // Solo procesar compras completadas
-      if (event !== "PURCHASE_COMPLETE") {
+      // Solo procesar compras aprobadas
+      if (event !== "PURCHASE_APPROVED") {
         res.writeHead(200);
         res.end(`Evento '${event}' ignorado`);
         return;
