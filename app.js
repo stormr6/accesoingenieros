@@ -85,7 +85,7 @@ if (loginForm) {
       if (userSnap.exists()) {
         const data = userSnap.data();
 
-        if (data.produtos?.ingenieros_principal === true) {
+        if (data.productos?.ingenieros_principal === true) {
           // Guardar email en sessionStorage y redirigir
           sessionStorage.setItem("cpi_email", email);
           window.location.href = "members.html";
