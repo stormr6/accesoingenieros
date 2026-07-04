@@ -169,49 +169,53 @@ async function initMembersPage(email) {
 
 function renderStoreCards(productos) {
   storeGrid.innerHTML = "";
+  const productosGrid = document.getElementById("productosGrid");
 
   ORDERBUMPS.forEach((ob) => {
     const comprado = productos[ob.key] === true;
 
-    // Portada: imagen real si existe, sino placeholder
     const coverHtml = ob.coverImg
       ? `<img src="${ob.coverImg}" alt="Portada ${ob.nombre}" loading="lazy" />`
-      : `<span class="cover-icon">🖼️</span>
-         <span class="cover-label">Portada</span>
-         <!-- Replace with real cover image -->`;
+      : `<span class="cover-icon">🖼️</span><span class="cover-label">Portada</span>`;
 
-    // Badge y botón de acción según estado
-    const badgeHtml = comprado
-      ? `<span class="badge badge-active">✔ Acceso activo</span>`
-      : `<span class="badge badge-locked">🔒 Bloqueado</span>`;
-
-    let actionHtml;
     if (comprado) {
-      if (ob.vistaModulos) {
-        actionHtml = `<button class="btn btn-green" onclick="mostrarVistaOB('${ob.vistaModulos}')">Ir al contenido →</button>`;
-      } else {
-        actionHtml = `<a href="#" class="btn btn-green" target="_blank" rel="noopener noreferrer">Ir al contenido →</a>`;
-      }
-    } else {
-      actionHtml = `<a href="${ob.hotmartUrl}" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Obtener acceso</a>`;
-    }
+      // ── OB comprado → aparece en "Tus Productos" como module-card
+      const actionHtml = ob.vistaModulos
+        ? `<button class="btn btn-orange" onclick="mostrarVistaOB('${ob.vistaModulos}')">Ver contenido →</button>`
+        : `<a href="#" class="btn btn-orange">Ver contenido →</a>`;
 
-    const card = document.createElement("div");
-    card.className = "ob-card";
-    card.innerHTML = `
-      <div class="ob-cover">
-        ${coverHtml}
-      </div>
-      <div class="ob-body">
-        <div class="ob-top">
+      const card = document.createElement("div");
+      card.className = "module-card";
+      card.innerHTML = `
+        <div class="module-cover">${coverHtml}</div>
+        <div class="module-body">
           <h3>${ob.nombre}</h3>
-          ${badgeHtml}
+          ${actionHtml}
         </div>
-        <p>${ob.descripcion}</p>
-        ${actionHtml}
-      </div>
-    `;
+      `;
+      productosGrid.appendChild(card);
 
-    storeGrid.appendChild(card);
+    } else {
+      // ── OB no comprado → aparece en "Potencia tu Kit"
+      const card = document.createElement("div");
+      card.className = "ob-card";
+      card.innerHTML = `
+        <div class="ob-cover">${coverHtml}</div>
+        <div class="ob-body">
+          <div class="ob-top">
+            <h3>${ob.nombre}</h3>
+            <span class="badge badge-locked">🔒 Bloqueado</span>
+          </div>
+          <p>${ob.descripcion}</p>
+          <a href="${ob.hotmartUrl}" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Obtener acceso</a>
+        </div>
+      `;
+      storeGrid.appendChild(card);
+    }
   });
+
+  // Si no hay OBs no comprados, ocultar sección "Potencia tu Kit"
+  if (storeGrid.children.length === 0) {
+    storeGrid.closest("section").style.display = "none";
+  }
 }
