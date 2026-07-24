@@ -6,7 +6,9 @@
 import { db } from "./firebase-config.js";
 import {
   doc,
-  getDoc
+  getDoc,
+  updateDoc,
+  serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 // ── Configuración de Orderbumps ──────────────────────────────
@@ -74,7 +76,6 @@ if (loginForm) {
       return;
     }
 
-    // Estado de carga
     loginBtn.disabled = true;
     loginBtn.textContent = "Verificando...";
 
@@ -86,14 +87,18 @@ if (loginForm) {
         const data = userSnap.data();
 
         if (data.productos?.ingenieros_principal === true) {
-          // Guardar email en sessionStorage y redirigir
+          // ── GRAVAR ÚLTIMO LOGIN ──────────────────────────
+          await updateDoc(userRef, {
+            ultimoLogin: serverTimestamp()
+          });
+          // ────────────────────────────────────────────────
+
           sessionStorage.setItem("cpi_email", email);
           window.location.href = "members.html";
           return;
         }
       }
 
-      // Usuario no encontrado o sin acceso principal
       showError();
     } catch (err) {
       console.error("Error al verificar acceso:", err);
@@ -121,14 +126,12 @@ const storeGrid = document.getElementById("storeGrid");
 if (storeGrid) {
   const email = sessionStorage.getItem("cpi_email");
 
-  // Guardia de acceso: si no hay sesión, volver al login
   if (!email) {
     window.location.href = "index.html";
   } else {
     initMembersPage(email);
   }
 
-  // Botón de logout
   document.getElementById("logoutBtn")?.addEventListener("click", () => {
     sessionStorage.removeItem("cpi_email");
     window.location.href = "index.html";
@@ -136,7 +139,6 @@ if (storeGrid) {
 }
 
 async function initMembersPage(email) {
-  // Mostrar email en bienvenida
   const welcomeEmailEl = document.getElementById("welcomeEmail");
   if (welcomeEmailEl) {
     welcomeEmailEl.textContent = email;
@@ -146,17 +148,14 @@ async function initMembersPage(email) {
     const userRef  = doc(db, "usuarios", email);
     const userSnap = await getDoc(userRef);
 
-    // Si el documento ya no existe (fue eliminado), redirigir al login
     if (!userSnap.exists()) {
       sessionStorage.removeItem("cpi_email");
       window.location.href = "index.html";
       return;
     }
 
-    const productos = userSnap.data().productos || {};
-
-    // Renderizar cards de orderbumps según estado
-    renderStoreCards(productos);
+    const produtos = userSnap.data().productos || {};
+    renderStoreCards(produtos);
 
   } catch (err) {
     console.error("Error al cargar datos del usuario:", err);
@@ -179,7 +178,6 @@ function renderStoreCards(productos) {
       : `<span class="cover-icon">🖼️</span><span class="cover-label">Portada</span>`;
 
     if (comprado) {
-      // ── OB comprado → aparece en "Tus Productos" como module-card
       const actionHtml = ob.vistaModulos
         ? `<button class="btn btn-orange" onclick="mostrarVistaOB('${ob.vistaModulos}')">Ver contenido →</button>`
         : `<a href="#" class="btn btn-orange">Ver contenido →</a>`;
@@ -196,7 +194,6 @@ function renderStoreCards(productos) {
       productosGrid.appendChild(card);
 
     } else {
-      // ── OB no comprado → aparece en "Potencia tu Kit"
       const card = document.createElement("div");
       card.className = "ob-card";
       card.innerHTML = `
@@ -214,7 +211,6 @@ function renderStoreCards(productos) {
     }
   });
 
-  // Si no hay OBs no comprados, ocultar sección "Potencia tu Kit"
   if (storeGrid.children.length === 0) {
     storeGrid.closest("section").style.display = "none";
   }
