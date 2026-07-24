@@ -87,11 +87,11 @@ if (loginForm) {
         const data = userSnap.data();
 
         if (data.productos?.ingenieros_principal === true) {
-          // ── GRAVAR ÚLTIMO LOGIN ──────────────────────────
-          await updateDoc(userRef, {
+          // ── GRAVAR ÚLTIMO LOGIN (silencioso — não bloqueia login) ──
+          updateDoc(userRef, {
             ultimoLogin: serverTimestamp()
-          });
-          // ────────────────────────────────────────────────
+          }).catch((err) => console.warn("ultimoLogin no grabado:", err));
+          // ───────────────────────────────────────────────────────────
 
           sessionStorage.setItem("cpi_email", email);
           window.location.href = "members.html";
