@@ -55,6 +55,20 @@ const ORDERBUMPS = [
   }
 ];
 
+// ── Configuración de Upsells ─────────────────────────────────
+const UPSELLS = [
+  {
+    key: "upsell1_instalacion",
+    nombre: "Instalación Total: Tu Asistente de IA Listo para Trabajar",
+    descripcion: "Configuración completa de tu entorno de IA para ingeniería. Todo listo para usar desde el primer día.",
+    hotmartUrl: "https://pay.hotmart.com/W106932039N?off=6pvz5ju5&checkoutMode=10",
+    coverImg: "https://i.imgur.com/0QihcmA.jpeg",
+    bannerImg: "https://i.imgur.com/0QihcmA.jpeg",
+    vistaModulos: "viewModulesUpsell1"
+  }
+  // Agrega aquí upsell2 cuando esté listo
+];
+
 // ─────────────────────────────────────────────────────────────
 // PÁGINA: LOGIN (index.html)
 // ─────────────────────────────────────────────────────────────
@@ -87,11 +101,10 @@ if (loginForm) {
         const data = userSnap.data();
 
         if (data.productos?.ingenieros_principal === true) {
-          // ── GRAVAR ÚLTIMO LOGIN (silencioso — não bloqueia login) ──
+          // Gravar último login (silencioso — no bloquea el login)
           updateDoc(userRef, {
             ultimoLogin: serverTimestamp()
           }).catch((err) => console.warn("ultimoLogin no grabado:", err));
-          // ───────────────────────────────────────────────────────────
 
           sessionStorage.setItem("cpi_email", email);
           window.location.href = "members.html";
@@ -110,9 +123,7 @@ if (loginForm) {
   });
 
   function showError(msg) {
-    if (msg) {
-      errorMsg.innerHTML = msg;
-    }
+    if (msg) errorMsg.innerHTML = msg;
     errorMsg.classList.add("visible");
     emailInput.focus();
   }
@@ -140,9 +151,7 @@ if (storeGrid) {
 
 async function initMembersPage(email) {
   const welcomeEmailEl = document.getElementById("welcomeEmail");
-  if (welcomeEmailEl) {
-    welcomeEmailEl.textContent = email;
-  }
+  if (welcomeEmailEl) welcomeEmailEl.textContent = email;
 
   try {
     const userRef  = doc(db, "usuarios", email);
@@ -154,8 +163,10 @@ async function initMembersPage(email) {
       return;
     }
 
-    const produtos = userSnap.data().productos || {};
-    renderStoreCards(produtos);
+    const productos = userSnap.data().productos || {};
+
+    renderStoreCards(productos);
+    renderUpsellBanner(productos);
 
   } catch (err) {
     console.error("Error al cargar datos del usuario:", err);
@@ -166,16 +177,17 @@ async function initMembersPage(email) {
   }
 }
 
+// ── Renderizar cards de OBs en "Tus Productos" / "Potencia tu Kit" ──
 function renderStoreCards(productos) {
   storeGrid.innerHTML = "";
   const productosGrid = document.getElementById("productosGrid");
 
+  // ── OBs ──
   ORDERBUMPS.forEach((ob) => {
     const comprado = productos[ob.key] === true;
-
     const coverHtml = ob.coverImg
       ? `<img src="${ob.coverImg}" alt="Portada ${ob.nombre}" loading="lazy" />`
-      : `<span class="cover-icon">🖼️</span><span class="cover-label">Portada</span>`;
+      : `<span class="cover-icon">🖼️</span>`;
 
     if (comprado) {
       const actionHtml = ob.vistaModulos
@@ -186,13 +198,9 @@ function renderStoreCards(productos) {
       card.className = "module-card";
       card.innerHTML = `
         <div class="module-cover">${coverHtml}</div>
-        <div class="module-body">
-          <h3>${ob.nombre}</h3>
-          ${actionHtml}
-        </div>
+        <div class="module-body"><h3>${ob.nombre}</h3>${actionHtml}</div>
       `;
       productosGrid.appendChild(card);
-
     } else {
       const card = document.createElement("div");
       card.className = "ob-card";
@@ -211,7 +219,54 @@ function renderStoreCards(productos) {
     }
   });
 
+  // ── Upsells comprados → aparecem em "Tus Productos" ──
+  UPSELLS.forEach((up) => {
+    const comprado = productos[up.key] === true;
+    if (!comprado) return;
+
+    const coverHtml = `<img src="${up.coverImg}" alt="${up.nombre}" loading="lazy" />`;
+    const card = document.createElement("div");
+    card.className = "module-card";
+    card.innerHTML = `
+      <div class="module-cover">${coverHtml}</div>
+      <div class="module-body">
+        <h3>${up.nombre}</h3>
+        <button class="btn btn-orange" onclick="mostrarVistaOB('${up.vistaModulos}')">Ver contenido →</button>
+      </div>
+    `;
+    productosGrid.appendChild(card);
+  });
+
+  // Ocultar sección "Potencia tu Kit" si no hay OBs sin comprar
   if (storeGrid.children.length === 0) {
     storeGrid.closest("section").style.display = "none";
+  }
+}
+
+// ── Renderizar banner carrossel de upsells no comprados ──────
+function renderUpsellBanner(productos) {
+  const track  = document.getElementById("bannerTrack");
+  const banner = document.getElementById("upsellBanner");
+
+  if (!track || !banner) return;
+
+  track.innerHTML = "";
+
+  UPSELLS.forEach((up) => {
+    const comprado = productos[up.key] === true;
+    if (comprado) return; // si ya compró, no mostrar banner
+
+    const slide = document.createElement("a");
+    slide.className = "banner-slide";
+    slide.href = up.hotmartUrl;
+    slide.target = "_blank";
+    slide.rel = "noopener noreferrer";
+    slide.innerHTML = `<img src="${up.bannerImg}" alt="${up.nombre}" loading="lazy" />`;
+    track.appendChild(slide);
+  });
+
+  // Inicializar carrossel solo si hay slides
+  if (track.children.length > 0) {
+    window.initCarrossel();
   }
 }
