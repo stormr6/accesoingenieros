@@ -63,7 +63,7 @@ const UPSELLS = [
     descripcion: "Configuración completa de tu entorno de IA para ingeniería. Todo listo para usar desde el primer día.",
     hotmartUrl: "https://pay.hotmart.com/W106932039N?off=6pvz5ju5&checkoutMode=10",
     coverImg: "https://i.imgur.com/0QihcmA.jpeg",
-    bannerImg: "https://i.imgur.com/0QihcmA.jpeg",
+    bannerImg: "https://i.imgur.com/4pNfjED.jpeg",
     vistaModulos: "viewModulesUpsell1"
   }
   // Agrega aquí upsell2 cuando esté listo
