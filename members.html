@@ -11,6 +11,59 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="style.css" />
+
+  <style>
+    /* ── BANNER CARROSSEL ── */
+    #upsellBanner {
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto 28px auto;
+      border-radius: 14px;
+      overflow: hidden;
+      position: relative;
+      background: #0A1628;
+    }
+    .banner-track {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+    .banner-slide {
+      min-width: 100%;
+      position: relative;
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+    }
+    .banner-slide img {
+      width: 100%;
+      display: block;
+      border-radius: 14px;
+      object-fit: cover;
+      max-height: 220px;
+    }
+    .banner-dots {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 6px;
+    }
+    .banner-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.4);
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .banner-dot.active {
+      background: #FF6B00;
+    }
+    .banner-close {
+      display: none;
+    }
+  </style>
 </head>
 <body>
 
@@ -39,8 +92,18 @@
     </div>
 
     <!-- ════════════════════════════════
+         BANNER CARROSSEL DE UPSELLS
+         Oculto por defecto — app.js lo muestra si aplica
+    ════════════════════════════════ -->
+    <div id="upsellBanner" style="display:none;">
+      <div class="banner-track" id="bannerTrack">
+        <!-- Los slides se insertan dinámicamente desde app.js -->
+      </div>
+      <div class="banner-dots" id="bannerDots"></div>
+    </div>
+
+    <!-- ════════════════════════════════
          VISTA 1: PRODUCTOS
-         Visible por defecto — lista de productos comprados
     ════════════════════════════════ -->
     <section id="viewProducts" aria-labelledby="productsTitle">
       <div class="section-header">
@@ -50,7 +113,7 @@
 
       <div class="modules-grid" id="productosGrid">
 
-        <!-- PRODUCTO PRINCIPAL — Claude para Ingenieros -->
+        <!-- PRODUCTO PRINCIPAL -->
         <div class="module-card product-card" id="cardPrincipal" role="button" tabindex="0" aria-label="Abrir Claude para Ingenieros">
           <div class="module-cover">
             <img src="https://i.imgur.com/T4tNvfP.jpeg" alt="Claude para Ingenieros" loading="lazy">
@@ -63,7 +126,7 @@
           </div>
         </div>
 
-        <!-- OBs comprados se insertan aquí dinámicamente desde app.js -->
+        <!-- OBs y upsells comprados se insertan aquí dinámicamente -->
 
       </div>
     </section>
@@ -71,380 +134,171 @@
     <div class="section-divider" id="dividerProducts"></div>
 
     <!-- ════════════════════════════════
-         VISTA 2: MÓDULOS DEL PRODUCTO
-         Oculta inicialmente — se muestra al entrar al producto
+         VISTA 2: MÓDULOS PRODUCTO PRINCIPAL
     ════════════════════════════════ -->
     <section id="viewModules" style="display:none;" aria-labelledby="modulesTitle">
-
-      <!-- Botón volver -->
-      <button class="btn-back" onclick="volverProductos()" aria-label="Volver a productos">
-        ← Volver
-      </button>
-
+      <button class="btn-back" onclick="volverProductos()">← Volver</button>
       <div class="section-header" style="margin-top:16px;">
         <h2 id="modulesTitle">Claude para Ingenieros</h2>
         <p>Accede a cada módulo de tu kit</p>
       </div>
-
       <div class="modules-grid">
-
-        <!-- MÓDULO 1 -->
         <div class="module-card">
-          <div class="module-cover">
-              <img src="https://i.imgur.com/VSSTtOE.jpeg" alt="Módulo 1" loading="lazy">
-          </div>
+          <div class="module-cover"><img src="https://i.imgur.com/VSSTtOE.jpeg" alt="Módulo 1" loading="lazy"></div>
           <div class="module-body">
             <h3>Módulo 1 — Empieza Aquí</h3>
-            <a href="https://drive.google.com/drive/folders/1a_aCSl_lxIJcPgLhFeVNHOZjgWxV2_uq?usp=sharing" class="btn btn-orange" target="_blank" rel="noopener noreferrer">
-              Acessar →
-            </a>
+            <a href="https://drive.google.com/drive/folders/1a_aCSl_lxIJcPgLhFeVNHOZjgWxV2_uq?usp=sharing" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a>
           </div>
         </div>
-
-        <!-- MÓDULO 2 -->
         <div class="module-card">
-          <div class="module-cover">
-              <img src="https://i.imgur.com/hSfmZcB.jpeg" alt="Módulo 2" loading="lazy">
-          </div>
+          <div class="module-cover"><img src="https://i.imgur.com/hSfmZcB.jpeg" alt="Módulo 2" loading="lazy"></div>
           <div class="module-body">
             <h3>Módulo 2 — Los 5 Agentes</h3>
-            <a href="https://drive.google.com/drive/folders/1NKBUYrkuF3k93RVktjj6hHZqzFquSoGf?usp=sharing" class="btn btn-orange" target="_blank" rel="noopener noreferrer">
-              Acessar →
-            </a>
+            <a href="https://drive.google.com/drive/folders/1NKBUYrkuF3k93RVktjj6hHZqzFquSoGf?usp=sharing" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a>
           </div>
         </div>
-
-        <!-- MÓDULO 3 -->
         <div class="module-card">
-          <div class="module-cover">
-              <img src="https://i.imgur.com/Oy41B5U.jpeg" alt="Módulo 3" loading="lazy">
-          </div>
+          <div class="module-cover"><img src="https://i.imgur.com/Oy41B5U.jpeg" alt="Módulo 3" loading="lazy"></div>
           <div class="module-body">
             <h3>Módulo 3 — Los 40 Prompts</h3>
-            <a href="https://drive.google.com/drive/folders/1ms7aDk2C6o8OW4vOuCx1rWJzj7XvCjAl?usp=sharing" class="btn btn-orange" target="_blank" rel="noopener noreferrer">
-              Acessar →
-            </a>
+            <a href="https://drive.google.com/drive/folders/1ms7aDk2C6o8OW4vOuCx1rWJzj7XvCjAl?usp=sharing" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a>
           </div>
         </div>
-
-        <!-- MÓDULO 4 -->
         <div class="module-card">
-          <div class="module-cover">
-              <img src="https://i.imgur.com/q7e8tnY.jpeg" alt="Módulo 4" loading="lazy">
-          </div>
+          <div class="module-cover"><img src="https://i.imgur.com/q7e8tnY.jpeg" alt="Módulo 4" loading="lazy"></div>
           <div class="module-body">
             <h3>Módulo 4 — Bonos</h3>
-            <a href="https://drive.google.com/drive/folders/1izXKc97cZiACIFnloIfHixvF4uWEVzRz?usp=sharing" class="btn btn-orange" target="_blank" rel="noopener noreferrer">
-              Acessar →
-            </a>
+            <a href="https://drive.google.com/drive/folders/1izXKc97cZiACIFnloIfHixvF4uWEVzRz?usp=sharing" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a>
           </div>
         </div>
-
       </div>
     </section>
 
     <!-- ════════════════════════════════
-         VISTA 3: MÓDULOS OB1 — Paquete 10 Agentes
-         Oculta — se muestra solo si el usuario compró OB1
+         VISTA 3: OB1 — Paquete 10 Agentes
     ════════════════════════════════ -->
     <section id="viewModulesOB1" style="display:none;" aria-labelledby="ob1Title">
-
-      <button class="btn-back" onclick="volverProductos()" aria-label="Volver a productos">
-        ← Volver
-      </button>
-
+      <button class="btn-back" onclick="volverProductos()">← Volver</button>
       <div class="section-header" style="margin-top:16px;">
         <h2 id="ob1Title">Paquete 10 Agentes Especializados</h2>
         <p>Accede a cada agente de tu paquete</p>
       </div>
-
       <div class="modules-grid">
-
-        <div class="module-card">
-          <div class="module-cover">
-            <img src="https://i.imgur.com/pB0mcAA.jpeg" alt="Agente 1" loading="lazy">
-          </div>
-          <div class="module-body">
-            <h3>Agente 1</h3>
-            <a href="https://drive.google.com/drive/folders/19NkQpGJJQfVs-EsxiqE79pYcaq99_kZe?usp=sharing" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a>
-          </div>
-        </div>
-
-        <div class="module-card">
-          <div class="module-cover">
-            <img src="https://i.imgur.com/yVUaPId.jpeg" alt="Agente 2" loading="lazy">
-          </div>
-          <div class="module-body">
-            <h3>Agente 2</h3>
-            <a href="https://drive.google.com/drive/folders/1Yox4VhPqxA5v4AVdayun1wfuwUtVLSEz?usp=sharing" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a>
-          </div>
-        </div>
-
-        <div class="module-card">
-          <div class="module-cover">
-            <img src="https://i.imgur.com/4eRuQHb.jpeg" alt="Agente 3" loading="lazy">
-          </div>
-          <div class="module-body">
-            <h3>Agente 3</h3>
-            <a href="https://drive.google.com/drive/folders/1Ofq_qwT-QJWptOJuv-ISIWgxOsnJBKJL?usp=sharing" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a>
-          </div>
-        </div>
-
-        <div class="module-card">
-          <div class="module-cover">
-            <img src="https://i.imgur.com/svzJck2.jpeg" alt="Agente 4" loading="lazy">
-          </div>
-          <div class="module-body">
-            <h3>Agente 4</h3>
-            <a href="https://drive.google.com/drive/folders/1IVbZFDCUkFqSoUSTiRV_sRB9umDx-Yeq?usp=sharing" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a>
-          </div>
-        </div>
-
-        <div class="module-card">
-          <div class="module-cover">
-            <img src="https://i.imgur.com/Hcfm9xd.jpeg" alt="Agente 5" loading="lazy">
-          </div>
-          <div class="module-body">
-            <h3>Agente 5</h3>
-            <a href="https://drive.google.com/drive/folders/1TB9IQAE1XeiVYx_x4HqEuYPbQgI0Aydx?usp=sharing" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a>
-          </div>
-        </div>
-
-        <div class="module-card">
-          <div class="module-cover">
-            <img src="https://i.imgur.com/Fcq0jb4.jpeg" alt="Agente 6" loading="lazy">
-          </div>
-          <div class="module-body">
-            <h3>Agente 6</h3>
-            <a href="https://drive.google.com/drive/folders/1MzdQuT_veBZe1U_aMIMGug0u_Wrd3Z66?usp=sharing" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a>
-          </div>
-        </div>
-
-        <div class="module-card">
-          <div class="module-cover">
-            <img src="https://i.imgur.com/jnHyKG5.jpeg" alt="Agente 7" loading="lazy">
-          </div>
-          <div class="module-body">
-            <h3>Agente 7</h3>
-            <a href="https://drive.google.com/drive/folders/1ScAsE01PlHpwEjbdZ_FoQtOeT8viCDOa?usp=sharing" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a>
-          </div>
-        </div>
-
-        <div class="module-card">
-          <div class="module-cover">
-            <img src="https://i.imgur.com/MU8S3hq.jpeg" alt="Agente 8" loading="lazy">
-          </div>
-          <div class="module-body">
-            <h3>Agente 8</h3>
-            <a href="https://drive.google.com/drive/folders/1Id1qB5w06VHzf8sbnORwpmR9OCTzFIiB?usp=sharing" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a>
-          </div>
-        </div>
-
-        <div class="module-card">
-          <div class="module-cover">
-            <img src="https://i.imgur.com/iEJKAas.jpeg" alt="Agente 9" loading="lazy">
-          </div>
-          <div class="module-body">
-            <h3>Agente 9</h3>
-            <a href="https://drive.google.com/drive/folders/1Lm4GTz27wa8mkFgLKy0v8pQJ5MdLsDGA?usp=sharing" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a>
-          </div>
-        </div>
-
-        <div class="module-card">
-          <div class="module-cover">
-            <img src="https://i.imgur.com/Qh6ktLA.jpeg" alt="Agente 10" loading="lazy">
-          </div>
-          <div class="module-body">
-            <h3>Agente 10</h3>
-            <a href="https://drive.google.com/drive/folders/1QLc9yPaDWUPMjvDzPEdo7Z2SeTtDYSP-?usp=sharing" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a>
-          </div>
-        </div>
-
-        <div class="module-card">
-          <div class="module-cover">
-            <img src="https://i.imgur.com/sXLzutP.jpeg" alt="Bonus" loading="lazy">
-          </div>
-          <div class="module-body">
-            <h3>Bonus</h3>
-            <a href="https://drive.google.com/drive/folders/12nCcYQ31TrfKyTLJaxy8dHaQ1zJnAkVl?usp=sharing" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a>
-          </div>
-        </div>
-
+        <div class="module-card"><div class="module-cover"><img src="https://i.imgur.com/pB0mcAA.jpeg" alt="Agente 1" loading="lazy"></div><div class="module-body"><h3>Agente 1</h3><a href="https://drive.google.com/drive/folders/19NkQpGJJQfVs-EsxiqE79pYcaq99_kZe?usp=sharing" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a></div></div>
+        <div class="module-card"><div class="module-cover"><img src="https://i.imgur.com/yVUaPId.jpeg" alt="Agente 2" loading="lazy"></div><div class="module-body"><h3>Agente 2</h3><a href="https://drive.google.com/drive/folders/1Yox4VhPqxA5v4AVdayun1wfuwUtVLSEz?usp=sharing" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a></div></div>
+        <div class="module-card"><div class="module-cover"><img src="https://i.imgur.com/4eRuQHb.jpeg" alt="Agente 3" loading="lazy"></div><div class="module-body"><h3>Agente 3</h3><a href="https://drive.google.com/drive/folders/1Ofq_qwT-QJWptOJuv-ISIWgxOsnJBKJL?usp=sharing" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a></div></div>
+        <div class="module-card"><div class="module-cover"><img src="https://i.imgur.com/svzJck2.jpeg" alt="Agente 4" loading="lazy"></div><div class="module-body"><h3>Agente 4</h3><a href="https://drive.google.com/drive/folders/1IVbZFDCUkFqSoUSTiRV_sRB9umDx-Yeq?usp=sharing" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a></div></div>
+        <div class="module-card"><div class="module-cover"><img src="https://i.imgur.com/Hcfm9xd.jpeg" alt="Agente 5" loading="lazy"></div><div class="module-body"><h3>Agente 5</h3><a href="https://drive.google.com/drive/folders/1TB9IQAE1XeiVYx_x4HqEuYPbQgI0Aydx?usp=sharing" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a></div></div>
+        <div class="module-card"><div class="module-cover"><img src="https://i.imgur.com/Fcq0jb4.jpeg" alt="Agente 6" loading="lazy"></div><div class="module-body"><h3>Agente 6</h3><a href="https://drive.google.com/drive/folders/1MzdQuT_veBZe1U_aMIMGug0u_Wrd3Z66?usp=sharing" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a></div></div>
+        <div class="module-card"><div class="module-cover"><img src="https://i.imgur.com/jnHyKG5.jpeg" alt="Agente 7" loading="lazy"></div><div class="module-body"><h3>Agente 7</h3><a href="https://drive.google.com/drive/folders/1ScAsE01PlHpwEjbdZ_FoQtOeT8viCDOa?usp=sharing" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a></div></div>
+        <div class="module-card"><div class="module-cover"><img src="https://i.imgur.com/MU8S3hq.jpeg" alt="Agente 8" loading="lazy"></div><div class="module-body"><h3>Agente 8</h3><a href="https://drive.google.com/drive/folders/1Id1qB5w06VHzf8sbnORwpmR9OCTzFIiB?usp=sharing" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a></div></div>
+        <div class="module-card"><div class="module-cover"><img src="https://i.imgur.com/iEJKAas.jpeg" alt="Agente 9" loading="lazy"></div><div class="module-body"><h3>Agente 9</h3><a href="https://drive.google.com/drive/folders/1Lm4GTz27wa8mkFgLKy0v8pQJ5MdLsDGA?usp=sharing" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a></div></div>
+        <div class="module-card"><div class="module-cover"><img src="https://i.imgur.com/Qh6ktLA.jpeg" alt="Agente 10" loading="lazy"></div><div class="module-body"><h3>Agente 10</h3><a href="https://drive.google.com/drive/folders/1QLc9yPaDWUPMjvDzPEdo7Z2SeTtDYSP-?usp=sharing" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a></div></div>
+        <div class="module-card"><div class="module-cover"><img src="https://i.imgur.com/sXLzutP.jpeg" alt="Bonus" loading="lazy"></div><div class="module-body"><h3>Bonus</h3><a href="https://drive.google.com/drive/folders/12nCcYQ31TrfKyTLJaxy8dHaQ1zJnAkVl?usp=sharing" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a></div></div>
       </div>
     </section>
 
     <!-- ════════════════════════════════
-         VISTA 4: MÓDULOS OB2 — KIT Normas Técnicas 2026
+         VISTA 4: OB2 — KIT Normas Técnicas 2026
     ════════════════════════════════ -->
     <section id="viewModulesOB2" style="display:none;" aria-labelledby="ob2Title">
-
-      <button class="btn-back" onclick="volverProductos()" aria-label="Volver a productos">
-        ← Volver
-      </button>
-
+      <button class="btn-back" onclick="volverProductos()">← Volver</button>
       <div class="section-header" style="margin-top:16px;">
         <h2 id="ob2Title">KIT Claude para Normas Técnicas 2026</h2>
         <p>Accede a cada módulo de tu kit</p>
       </div>
-
       <div class="modules-grid">
-
-        <div class="module-card">
-          <div class="module-cover">
-            <img src="https://i.imgur.com/4Tnngfs.jpeg" alt="Módulo 01" loading="lazy">
-          </div>
-          <div class="module-body">
-            <h3>01 — Agente Claude · Especialista en Normas Técnicas</h3>
-            <a href="https://drive.google.com/drive/folders/1lgZB4y_EVEciyTnE5iPc4HtYXUPzJzeM?usp=sharing" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a>
-          </div>
-        </div>
-
-        <div class="module-card">
-          <div class="module-cover">
-            <img src="https://i.imgur.com/dpu5MiV.jpeg" alt="Módulo 02" loading="lazy">
-          </div>
-          <div class="module-body">
-            <h3>02 — 15 Prompts Prontos · Normas Técnicas na Práctica</h3>
-            <a href="https://drive.google.com/drive/folders/1KTbktKUiqQGRe5q8lH0VjEcZ1bS3dQ56?usp=sharing" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a>
-          </div>
-        </div>
-
-        <div class="module-card">
-          <div class="module-cover">
-            <img src="https://i.imgur.com/gGUQjrb.jpeg" alt="Módulo 03" loading="lazy">
-          </div>
-          <div class="module-body">
-            <h3>03 — 5 E-mails Prontos · Comunicação com Clientes</h3>
-            <a href="https://drive.google.com/drive/folders/1z_BoeTG4EPCSBtzSAFIftHQQqg8nkvVR?usp=sharing" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a>
-          </div>
-        </div>
-
-        <div class="module-card">
-          <div class="module-cover">
-            <img src="https://i.imgur.com/2cJxseG.jpeg" alt="Módulo 04" loading="lazy">
-          </div>
-          <div class="module-body">
-            <h3>04 — Simulador de Impacto por Tipo de Obra</h3>
-            <a href="https://drive.google.com/drive/folders/19Lgm9VsWjH1-Qs3stKvEQvgqkr4d5HFs?usp=sharing" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a>
-          </div>
-        </div>
-
-        <div class="module-card">
-          <div class="module-cover">
-            <img src="https://i.imgur.com/dPhhXyj.jpeg" alt="Módulo 05" loading="lazy">
-          </div>
-          <div class="module-body">
-            <h3>05 — Mapa Visual das Principais Atualizações</h3>
-            <a href="https://drive.google.com/drive/folders/1DEAi_9PH7M0eCN89utjgHM3J92kD3q6s?usp=sharing" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a>
-          </div>
-        </div>
-
+        <div class="module-card"><div class="module-cover"><img src="https://i.imgur.com/4Tnngfs.jpeg" alt="Módulo 01" loading="lazy"></div><div class="module-body"><h3>01 — Agente Claude · Especialista en Normas Técnicas</h3><a href="https://drive.google.com/drive/folders/1lgZB4y_EVEciyTnE5iPc4HtYXUPzJzeM?usp=sharing" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a></div></div>
+        <div class="module-card"><div class="module-cover"><img src="https://i.imgur.com/dpu5MiV.jpeg" alt="Módulo 02" loading="lazy"></div><div class="module-body"><h3>02 — 15 Prompts Listos · Normas Técnicas en la Práctica</h3><a href="https://drive.google.com/drive/folders/1KTbktKUiqQGRe5q8lH0VjEcZ1bS3dQ56?usp=sharing" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a></div></div>
+        <div class="module-card"><div class="module-cover"><img src="https://i.imgur.com/gGUQjrb.jpeg" alt="Módulo 03" loading="lazy"></div><div class="module-body"><h3>03 — 5 E-mails Listos · Comunicación con Clientes</h3><a href="https://drive.google.com/drive/folders/1z_BoeTG4EPCSBtzSAFIftHQQqg8nkvVR?usp=sharing" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a></div></div>
+        <div class="module-card"><div class="module-cover"><img src="https://i.imgur.com/2cJxseG.jpeg" alt="Módulo 04" loading="lazy"></div><div class="module-body"><h3>04 — Simulador de Impacto por Tipo de Obra</h3><a href="https://drive.google.com/drive/folders/19Lgm9VsWjH1-Qs3stKvEQvgqkr4d5HFs?usp=sharing" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a></div></div>
+        <div class="module-card"><div class="module-cover"><img src="https://i.imgur.com/dPhhXyj.jpeg" alt="Módulo 05" loading="lazy"></div><div class="module-body"><h3>05 — Mapa Visual de las Principales Actualizaciones</h3><a href="https://drive.google.com/drive/folders/1DEAi_9PH7M0eCN89utjgHM3J92kD3q6s?usp=sharing" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a></div></div>
       </div>
     </section>
 
     <!-- ════════════════════════════════
-         VISTA 5: MÓDULOS OB3 — Pack Estudio de Ingeniería Rentable
+         VISTA 5: OB3 — Pack Estudio Rentable
     ════════════════════════════════ -->
     <section id="viewModulesOB3" style="display:none;" aria-labelledby="ob3Title">
-
-      <button class="btn-back" onclick="volverProductos()" aria-label="Volver a productos">
-        ← Volver
-      </button>
-
+      <button class="btn-back" onclick="volverProductos()">← Volver</button>
       <div class="section-header" style="margin-top:16px;">
         <h2 id="ob3Title">Pack Estudio de Ingeniería Rentable</h2>
         <p>Accede a cada módulo de tu pack</p>
       </div>
-
       <div class="modules-grid">
-
-        <div class="module-card">
-          <div class="module-cover">
-            <img src="https://i.imgur.com/XzwpabI.jpeg" alt="Módulo 01" loading="lazy">
-          </div>
-          <div class="module-body">
-            <h3>Módulo 01</h3>
-            <a href="https://drive.google.com/drive/folders/1eifbPXvOqh-ofUY6f1u5Y6wuBEZC57RG?usp=sharing" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a>
-          </div>
-        </div>
-
-        <div class="module-card">
-          <div class="module-cover">
-            <img src="https://i.imgur.com/m2Lj0QJ.jpeg" alt="Módulo 02" loading="lazy">
-          </div>
-          <div class="module-body">
-            <h3>Módulo 02</h3>
-            <a href="https://drive.google.com/drive/folders/1WHyxD4n7ri1uANJZacdaP1Sb_VH6eV2f?usp=sharing" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a>
-          </div>
-        </div>
-
-        <div class="module-card">
-          <div class="module-cover">
-            <img src="https://i.imgur.com/OtYq5Kr.jpeg" alt="Módulo 03" loading="lazy">
-          </div>
-          <div class="module-body">
-            <h3>Módulo 03</h3>
-            <a href="https://drive.google.com/drive/folders/15vQnbl_8YVLjnOrOwCIks7JTrcRdrkWF?usp=sharing" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a>
-          </div>
-        </div>
-
-        <div class="module-card">
-          <div class="module-cover">
-            <img src="https://i.imgur.com/U6UQ3ld.jpeg" alt="Módulo 04" loading="lazy">
-          </div>
-          <div class="module-body">
-            <h3>Módulo 04</h3>
-            <a href="https://drive.google.com/drive/folders/16P-XimZw_Z2NNfU_u2T-7B5hOxxevfly?usp=sharing" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a>
-          </div>
-        </div>
-
-        <div class="module-card">
-          <div class="module-cover">
-            <img src="https://i.imgur.com/pRgBaon.jpeg" alt="Módulo 05" loading="lazy">
-          </div>
-          <div class="module-body">
-            <h3>Módulo 05</h3>
-            <a href="https://drive.google.com/drive/folders/1Qh0bxbwKBMtf78kqrjstfoYLtNNvM8qU?usp=sharing" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a>
-          </div>
-        </div>
-
+        <div class="module-card"><div class="module-cover"><img src="https://i.imgur.com/XzwpabI.jpeg" alt="Módulo 01" loading="lazy"></div><div class="module-body"><h3>Módulo 01</h3><a href="https://drive.google.com/drive/folders/1eifbPXvOqh-ofUY6f1u5Y6wuBEZC57RG?usp=sharing" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a></div></div>
+        <div class="module-card"><div class="module-cover"><img src="https://i.imgur.com/m2Lj0QJ.jpeg" alt="Módulo 02" loading="lazy"></div><div class="module-body"><h3>Módulo 02</h3><a href="https://drive.google.com/drive/folders/1WHyxD4n7ri1uANJZacdaP1Sb_VH6eV2f?usp=sharing" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a></div></div>
+        <div class="module-card"><div class="module-cover"><img src="https://i.imgur.com/OtYq5Kr.jpeg" alt="Módulo 03" loading="lazy"></div><div class="module-body"><h3>Módulo 03</h3><a href="https://drive.google.com/drive/folders/15vQnbl_8YVLjnOrOwCIks7JTrcRdrkWF?usp=sharing" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a></div></div>
+        <div class="module-card"><div class="module-cover"><img src="https://i.imgur.com/U6UQ3ld.jpeg" alt="Módulo 04" loading="lazy"></div><div class="module-body"><h3>Módulo 04</h3><a href="https://drive.google.com/drive/folders/16P-XimZw_Z2NNfU_u2T-7B5hOxxevfly?usp=sharing" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a></div></div>
+        <div class="module-card"><div class="module-cover"><img src="https://i.imgur.com/pRgBaon.jpeg" alt="Módulo 05" loading="lazy"></div><div class="module-body"><h3>Módulo 05</h3><a href="https://drive.google.com/drive/folders/1Qh0bxbwKBMtf78kqrjstfoYLtNNvM8qU?usp=sharing" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a></div></div>
       </div>
     </section>
 
     <!-- ════════════════════════════════
-         VISTA 6: OB4 — Actualizaciones y Funcionalidades
+         VISTA 6: OB4 — Actualizaciones
     ════════════════════════════════ -->
     <section id="viewModulesOB4" style="display:none;" aria-labelledby="ob4Title">
-
-      <button class="btn-back" onclick="volverProductos()" aria-label="Volver a productos">
-        ← Volver
-      </button>
-
+      <button class="btn-back" onclick="volverProductos()">← Volver</button>
       <div class="benefit-card">
         <div class="benefit-icon">🚀</div>
         <h2 id="ob4Title">Actualizaciones y Funcionalidades</h2>
         <p>¡Genial! Con este complemento, cada nueva actualización, prompt o agente que lancemos se añadirá automáticamente a tu kit — sin costo adicional y sin que tengas que hacer nada.</p>
         <div class="benefit-tag">Incluido en tu cuenta</div>
       </div>
-
     </section>
 
     <!-- ════════════════════════════════
          VISTA 7: OB5 — Acceso Vitalicio
     ════════════════════════════════ -->
     <section id="viewModulesOB5" style="display:none;" aria-labelledby="ob5Title">
-
-      <button class="btn-back" onclick="volverProductos()" aria-label="Volver a productos">
-        ← Volver
-      </button>
-
+      <button class="btn-back" onclick="volverProductos()">← Volver</button>
       <div class="benefit-card">
         <div class="benefit-icon">♾️</div>
         <h2 id="ob5Title">Acceso Vitalicio</h2>
         <p>¡Felicidades! Tienes acceso de por vida a Claude para Ingenieros. Todo el contenido actual y futuro del kit es tuyo para siempre — pago único, sin renovaciones, sin sorpresas.</p>
         <div class="benefit-tag">Acceso garantizado de por vida</div>
       </div>
+    </section>
 
+    <!-- ════════════════════════════════
+         VISTA 8: UPSELL 1 — Instalación Total
+    ════════════════════════════════ -->
+    <section id="viewModulesUpsell1" style="display:none;" aria-labelledby="upsell1Title">
+      <button class="btn-back" onclick="volverProductos()">← Volver</button>
+      <div class="section-header" style="margin-top:16px;">
+        <h2 id="upsell1Title">Instalación Total: Tu Asistente de IA Listo para Trabajar</h2>
+        <p>Accede a cada módulo de tu producto</p>
+      </div>
+      <div class="modules-grid">
+        <div class="module-card">
+          <div class="module-cover"><img src="https://i.imgur.com/jeIoubZ.jpeg" alt="Módulo 1" loading="lazy"></div>
+          <div class="module-body">
+            <h3>Módulo 1</h3>
+            <a href="https://drive.google.com/drive/folders/12eAnKLoIFfs4QfLwljEwPfcpTJ3w3OKJ?usp=sharing" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a>
+          </div>
+        </div>
+        <div class="module-card">
+          <div class="module-cover"><img src="https://i.imgur.com/LJj9IPY.jpeg" alt="Módulo 2" loading="lazy"></div>
+          <div class="module-body">
+            <h3>Módulo 2</h3>
+            <a href="https://drive.google.com/drive/folders/1CRvszZAQDM8VcglKJ9xDh97M1MZp4CkO?usp=sharing" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a>
+          </div>
+        </div>
+        <div class="module-card">
+          <div class="module-cover"><img src="https://i.imgur.com/xELzyCT.jpeg" alt="Módulo 3" loading="lazy"></div>
+          <div class="module-body">
+            <h3>Módulo 3</h3>
+            <a href="https://drive.google.com/drive/folders/12ophA8lBwY-t310uHp2RtcbvvKCnCjUu?usp=sharing" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a>
+          </div>
+        </div>
+        <div class="module-card">
+          <div class="module-cover"><img src="https://i.imgur.com/b4yp1p9.jpeg" alt="Módulo 4" loading="lazy"></div>
+          <div class="module-body">
+            <h3>Módulo 4</h3>
+            <a href="https://drive.google.com/drive/folders/1iqL0v48l2SWIkopSE0Y51hz5NwlcNd2A?usp=sharing" class="btn btn-orange" target="_blank" rel="noopener noreferrer">Acessar →</a>
+          </div>
+        </div>
+      </div>
     </section>
 
     <div class="section-divider"></div>
@@ -457,43 +311,17 @@
         <h2 id="storeTitle">Potencia tu Kit</h2>
         <p>Complementos disponibles para tu cuenta</p>
       </div>
-
       <div class="store-grid" id="storeGrid">
-        <!-- Skeletons de carga -->
-        <div class="ob-card" style="opacity:0.4">
-          <div class="ob-cover skeleton"></div>
-          <div class="ob-body">
-            <div class="skeleton" style="height:18px;width:70%;margin-bottom:10px;"></div>
-            <div class="skeleton" style="height:14px;width:100%;margin-bottom:6px;"></div>
-            <div class="skeleton" style="height:14px;width:80%;margin-bottom:16px;"></div>
-            <div class="skeleton" style="height:38px;width:100%;"></div>
-          </div>
-        </div>
-        <div class="ob-card" style="opacity:0.4">
-          <div class="ob-cover skeleton"></div>
-          <div class="ob-body">
-            <div class="skeleton" style="height:18px;width:70%;margin-bottom:10px;"></div>
-            <div class="skeleton" style="height:14px;width:100%;margin-bottom:6px;"></div>
-            <div class="skeleton" style="height:14px;width:80%;margin-bottom:16px;"></div>
-            <div class="skeleton" style="height:38px;width:100%;"></div>
-          </div>
-        </div>
-        <div class="ob-card" style="opacity:0.4">
-          <div class="ob-cover skeleton"></div>
-          <div class="ob-body">
-            <div class="skeleton" style="height:18px;width:70%;margin-bottom:10px;"></div>
-            <div class="skeleton" style="height:14px;width:100%;margin-bottom:6px;"></div>
-            <div class="skeleton" style="height:14px;width:80%;margin-bottom:16px;"></div>
-            <div class="skeleton" style="height:38px;width:100%;"></div>
-          </div>
-        </div>
+        <div class="ob-card" style="opacity:0.4"><div class="ob-cover skeleton"></div><div class="ob-body"><div class="skeleton" style="height:18px;width:70%;margin-bottom:10px;"></div><div class="skeleton" style="height:14px;width:100%;margin-bottom:6px;"></div><div class="skeleton" style="height:14px;width:80%;margin-bottom:16px;"></div><div class="skeleton" style="height:38px;width:100%;"></div></div></div>
+        <div class="ob-card" style="opacity:0.4"><div class="ob-cover skeleton"></div><div class="ob-body"><div class="skeleton" style="height:18px;width:70%;margin-bottom:10px;"></div><div class="skeleton" style="height:14px;width:100%;margin-bottom:6px;"></div><div class="skeleton" style="height:14px;width:80%;margin-bottom:16px;"></div><div class="skeleton" style="height:38px;width:100%;"></div></div></div>
+        <div class="ob-card" style="opacity:0.4"><div class="ob-cover skeleton"></div><div class="ob-body"><div class="skeleton" style="height:18px;width:70%;margin-bottom:10px;"></div><div class="skeleton" style="height:14px;width:100%;margin-bottom:6px;"></div><div class="skeleton" style="height:14px;width:80%;margin-bottom:16px;"></div><div class="skeleton" style="height:38px;width:100%;"></div></div></div>
       </div>
     </section>
 
   </main>
 
   <script>
-    const VISTAS_OB = ['viewModules', 'viewModulesOB1', 'viewModulesOB2', 'viewModulesOB3', 'viewModulesOB4', 'viewModulesOB5'];
+    const VISTAS_OB = ['viewModules','viewModulesOB1','viewModulesOB2','viewModulesOB3','viewModulesOB4','viewModulesOB5','viewModulesUpsell1'];
 
     function ocultarTodasVistas() {
       VISTAS_OB.forEach(id => {
@@ -505,6 +333,7 @@
     function mostrarModulos() {
       document.getElementById('viewProducts').style.display = 'none';
       document.getElementById('dividerProducts').style.display = 'none';
+      document.getElementById('upsellBanner').style.display = 'none';
       ocultarTodasVistas();
       document.getElementById('viewModules').style.display = 'block';
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -513,6 +342,7 @@
     function mostrarVistaOB(vistaId) {
       document.getElementById('viewProducts').style.display = 'none';
       document.getElementById('dividerProducts').style.display = 'none';
+      document.getElementById('upsellBanner').style.display = 'none';
       ocultarTodasVistas();
       document.getElementById(vistaId).style.display = 'block';
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -522,8 +352,58 @@
       ocultarTodasVistas();
       document.getElementById('viewProducts').style.display = 'block';
       document.getElementById('dividerProducts').style.display = 'block';
+      // Banner só reaparece se tiver slides ativos
+      const banner = document.getElementById('upsellBanner');
+      const track = document.getElementById('bannerTrack');
+      if (track && track.children.length > 0) {
+        banner.style.display = 'block';
+      }
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
+
+    // ── CARROSSEL ────────────────────────────────────────────
+    let bannerIndex = 0;
+    let bannerTimer = null;
+    let totalSlides = 0;
+
+    function initCarrossel() {
+      const track = document.getElementById('bannerTrack');
+      const dotsEl = document.getElementById('bannerDots');
+      totalSlides = track.children.length;
+
+      if (totalSlides === 0) return;
+
+      document.getElementById('upsellBanner').style.display = 'block';
+
+      // Criar dots
+      dotsEl.innerHTML = '';
+      for (let i = 0; i < totalSlides; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'banner-dot' + (i === 0 ? ' active' : '');
+        dot.onclick = () => irParaSlide(i);
+        dotsEl.appendChild(dot);
+      }
+
+      if (totalSlides > 1) {
+        bannerTimer = setInterval(() => {
+          irParaSlide((bannerIndex + 1) % totalSlides);
+        }, 5000);
+      }
+    }
+
+    function irParaSlide(index) {
+      bannerIndex = index;
+      const track = document.getElementById('bannerTrack');
+      track.style.transform = `translateX(-${index * 100}%)`;
+      document.querySelectorAll('.banner-dot').forEach((d, i) => {
+        d.classList.toggle('active', i === index);
+      });
+    }
+
+    window.initCarrossel = initCarrossel;
+    window.mostrarModulos = mostrarModulos;
+    window.mostrarVistaOB = mostrarVistaOB;
+    window.volverProductos = volverProductos;
   </script>
 
   <script type="module" src="app.js"></script>
