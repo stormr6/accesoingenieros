@@ -26,7 +26,8 @@ const PRODUCT_MAP = {
   "7914914": "ob2_normas",
   "7914929": "ob3_estudio",
   "7888071": "ob4_actualizaciones",
-  "7888056": "ob5_vitalicio"
+  "7888056": "ob5_vitalicio",
+  "8213493": "upsell1_instalacion"
 };
 
 // ── Handler principal ─────────────────────────────────────────
